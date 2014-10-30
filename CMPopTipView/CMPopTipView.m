@@ -703,6 +703,8 @@
 		self.backgroundColor = [UIColor colorWithRed:62.0/255.0 green:60.0/255.0 blue:154.0/255.0 alpha:1.0];
         self.has3DStyle = YES;
         self.borderColor = [UIColor blackColor];
+        self.shadowOffset = CGSizeMake(0, 3);
+        self.shadowRadius = 2.0;
         self.hasShadow = YES;
         self.animation = CMPopTipAnimationSlide;
         self.dismissTapAnywhere = NO;
@@ -719,14 +721,24 @@
         _hasShadow = hasShadow;
 
         if (hasShadow) {
-            self.layer.shadowOffset = CGSizeMake(0, 3);
-            self.layer.shadowRadius = 2.0;
+            self.layer.shadowOffset = self.shadowOffset;
+            self.layer.shadowRadius = self.shadowRadius;
             self.layer.shadowColor = [[UIColor blackColor] CGColor];
             self.layer.shadowOpacity = 0.3;
         } else {
             self.layer.shadowOpacity = 0.0;
         }
     }
+}
+
+- (void)setShadowOffset:(CGSize)shadowOffset{
+    _shadowOffset = shadowOffset;
+    self.layer.shadowOffset = shadowOffset;
+}
+
+- (void)setShadowRadius:(CGFloat)shadowRadius{
+    _shadowRadius = shadowRadius;
+    self.layer.shadowRadius = shadowRadius;
 }
 
 - (PointDirection) getPointDirection

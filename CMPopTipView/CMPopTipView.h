@@ -131,6 +131,8 @@ typedef enum {
 @property (nonatomic, assign)           CGFloat                 sidePadding;
 @property (nonatomic, assign)           CGFloat                 topMargin;
 @property (nonatomic, assign)           CGFloat                 pointerSize;
+@property (nonatomic, assign)           CGSize                  shadowOffset;
+@property (nonatomic, assign)           CGFloat                 shadowRadius;
 
 /* Contents can be either a message or a UIView */
 - (id)initWithTitle:(NSString *)titleToShow message:(NSString *)messageToShow;
