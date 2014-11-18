@@ -465,13 +465,14 @@
 	if ([superview isKindOfClass:[UIWindow class]])
 		superview = containerView;
 	
-	CGPoint targetRelativeOrigin    = [targetView.superview convertPoint:targetView.frame.origin toView:superview];
+	CGPoint targetRelativeOrigin = [targetView.superview convertPoint:targetView.frame.origin toView:superview];
+    CGSize targetRelativeSize = [targetView.superview convertRect:targetView.frame toView:superview].size;
 	CGPoint containerRelativeOrigin = [superview convertPoint:containerView.frame.origin toView:superview];
     
 	CGFloat pointerY;	// Y coordinate of pointer target (within containerView)
 	
     
-    if (targetRelativeOrigin.y+targetView.bounds.size.height < containerRelativeOrigin.y) {
+    if (targetRelativeOrigin.y+targetRelativeSize.height < containerRelativeOrigin.y) {
         pointerY = 0.0;
         _pointDirection = PointDirectionUp;
     }
@@ -485,7 +486,7 @@
         CGFloat sizeBelow = containerView.bounds.size.height - targetOriginInContainer.y;
         if (_pointDirection == PointDirectionAny) {
             if (sizeBelow > targetOriginInContainer.y) {
-                pointerY = targetOriginInContainer.y + targetView.bounds.size.height;
+                pointerY = targetOriginInContainer.y + targetRelativeSize.height;
                 _pointDirection = PointDirectionUp;
             }
             else {
@@ -498,7 +499,7 @@
                 pointerY = targetOriginInContainer.y;
             }
             else {
-                pointerY = targetOriginInContainer.y + targetView.bounds.size.height;
+                pointerY = targetOriginInContainer.y + targetRelativeSize.height;
             }
         }
     }
